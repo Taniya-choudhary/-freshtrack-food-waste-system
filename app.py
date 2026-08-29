@@ -11,7 +11,10 @@ app=Flask(__name__)
 app.secret_key="freshtrack-training-secret"
 
 def db():
-    c=sqlite3.connect(DB); c.row_factory=sqlite3.Row; return c
+    DB.parent.mkdir(parents=True, exist_ok=True)
+    c = sqlite3.connect(str(DB))
+    c.row_factory = sqlite3.Row
+    return c
 
 def init_db():
     c=db()
