@@ -55,11 +55,11 @@ def login():
         email=request.form["email"].strip().lower(); pw=request.form["password"]; c=db()
         u=c.execute("SELECT * FROM users WHERE email=?",(email,)).fetchone(); c.close()
         if u and check_password_hash(u["password"],pw):
-    session.pop("_flashes", None)
-    session["user_id"] = u["id"]
-    session["name"] = u["name"]
-    return redirect(url_for("dashboard"))
-        flash("Invalid email or password.","error")
+            session.pop("_flashes", None)
+            session["user_id"] = u["id"]
+            session["name"] = u["name"]
+        return redirect(url_for("dashboard"))
+    flash("Invalid email or password.","error")
     return render_template("auth.html",mode="login")
 
 @app.route("/logout")
