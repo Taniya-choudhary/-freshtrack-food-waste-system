@@ -145,6 +145,7 @@ def delete_shopping(item_id):
     c=db(); c.execute("DELETE FROM shopping WHERE id=? AND user_id=?",(item_id,session["user_id"])); c.commit(); c.close(); return redirect(url_for("shopping"))
 
 
+init_db()
+
 if __name__ == "__main__":
-    init_db()
     app.run(debug=True)
