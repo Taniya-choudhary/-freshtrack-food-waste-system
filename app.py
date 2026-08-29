@@ -67,7 +67,7 @@ def dashboard():
     q=lambda sql: c.execute(sql,(uid,)).fetchone()["n"]
     counts={"total":q("SELECT COUNT(*) n FROM food_items WHERE user_id=?"),
             "available":q("SELECT COUNT(*) n FROM food_items WHERE user_id=? AND state='Available'"),
-            "priority":q("SELECT COUNT(*) n FROM food_items WHERE user_id=? AND state='Available' AND status IN ('Use Soon','Expiring Soon')"),
+            "priority":q("SELECT COUNT(*) n FROM food_items  Qqq'WHERE user_id=? AND state='Available' AND status IN ('Use Soon','Expiring Soon')"),
             "expired":q("SELECT COUNT(*) n FROM food_items WHERE user_id=? AND status='Expired' AND state='Available'"),
             "wasted":c.execute("SELECT COALESCE(SUM(price),0) n FROM activity WHERE user_id=? AND action='Wasted'",(uid,)).fetchone()["n"],
             "donated":c.execute("SELECT COALESCE(SUM(price),0) n FROM activity WHERE user_id=? AND action='Donated'",(uid,)).fetchone()["n"],
@@ -144,4 +144,7 @@ def toggle_shopping(item_id):
 def delete_shopping(item_id):
     c=db(); c.execute("DELETE FROM shopping WHERE id=? AND user_id=?",(item_id,session["user_id"])); c.commit(); c.close(); return redirect(url_for("shopping"))
 
-if __name__=="__main__": init_db(); app.run(debug=True)
+if _init_db()
+
+if __name__ == "__main__":
+    app.run(debug=True)
